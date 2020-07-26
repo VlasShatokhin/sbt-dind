@@ -1,19 +1,22 @@
-```
-JDK_VERSION=11.0.7
-SCALA_VERSION=2.13.3
+## sbt + docker
+
+#### Building the image
+```sh
+JDK_VERSION=11.0.8
 SBT_VERSION=1.3.13
 
-IMAGE_TAG=${JDK_VERSION}_${SCALA_VERSION}_${SBT_VERSION}
+IMAGE_NAME=vlasshatokhin/sbt-dind
+IMAGE_TAG=${JDK_VERSION}_${SBT_VERSION}
 
-docker pull vlasshatokhin/sbt-dind:latest || true
+docker pull ${IMAGE_TAG}:latest || true
 docker build \
     --pull \
-    --build-arg SCALA_VERSION=${SCALA_VERSION} \
     --build-arg SBT_VERSION=${SBT_VERSION} \
     --build-arg JDK_VERSION=${JDK_VERSION} \
-    --cache-from $CI_REGISTRY_IMAGE:latest \
-    -t vlasshatokhin/sbt-dind:${IMAGE_TAG} \
+    --cache-from ${IMAGE_NAME}:latest \
+    -t ${IMAGE_NAME}:${IMAGE_TAG} \
     .
-docker tag vlasshatokhin/sbt-dind:${IMAGE_TAG} vlasshatokhin/sbt-dind:latest
-docker push vlasshatokhin/sbt-dind:latest
+docker push ${IMAGE_NAME}:${IMAGE_TAG}
+docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${IMAGE_NAME}:latest
+docker push ${IMAGE_NAME}:latest
 ```
