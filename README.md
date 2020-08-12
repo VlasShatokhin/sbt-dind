@@ -2,8 +2,6 @@
 
 #### Building the image
 ```sh
-set -e
-
 SBT_VERSION=1.3.13
 
 IMAGE_NAME=vlasshatokhin/sbt-dind
