@@ -2,10 +2,11 @@
 
 #### Building the image
 ```sh
-SBT_VERSION=1.3.13
+SBT_VERSION=1.4.1
+JDK_VERSION=15.0.1_9
 
 IMAGE_NAME=vlasshatokhin/sbt-dind
-IMAGE_TAG=${SBT_VERSION}
+IMAGE_TAG=${SBT_VERSION}-${JDK_VERSION}
 
 docker pull ${IMAGE_NAME}:latest || true
 docker build \
